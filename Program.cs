@@ -10,27 +10,13 @@ namespace Orchard_file_splitter_Core
     {
         static void Main(string[] args)
         {
-            try
-            {
-                IHost host = Host.CreateDefaultBuilder(args).Build();
-                IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
-                FileSplitter fileSplitter = new FileSplitter(config);
-                fileSplitter.SplitFile();
-                Console.ReadKey();
-                host.RunAsync();
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            IHost host = Host.CreateDefaultBuilder(args).Build();
+            IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+            FileSplitter fileSplitter = new FileSplitter(config);
+            Console.WriteLine("Splitting Process Started.\n");
+            fileSplitter.SplitFile();
+            Console.WriteLine("Splitting Process is Completed.");
+            host.RunAsync();
         }
     }
 }
